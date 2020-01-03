@@ -67,15 +67,14 @@ def writeVideo(path, listOfPic, listOfRec, numOfPic):
 * output: nothing, but generate graphs
 """
 def drawNewGraph(aGraph, path, x):
-    colorSequence = ('b', 'g', 'r', 'c', 'm', 'y', 'k', 'w', 'b', 'g', 'r', 'c', 'm', 'y', 'k', 'w', 'b', 'g', 'r', 'c', 'm', 'y', 'k', 'w', 'b', 'g', 'r', 'c', 'm', 'y', 'k', 'w',)
-
+    colorSequence = ('b', 'g', 'r', 'c', 'm', 'y', 'k', 'w')
     positionOfPoint = {}
     colorOfPoint = ()
     listOfPoint = []
     labOfPoint = {}
     for i in range(0, len(aGraph.nodes)):
         positionOfPoint[i] = (aGraph.nodes[i]['x'], aGraph.nodes[i]['y'])
-        colorOfPoint += (colorSequence[aGraph.nodes[i]['order']],)
+        colorOfPoint += (colorSequence[aGraph.nodes[i]['order'] % len(colorSequence)],)
         listOfPoint.append(aGraph.nodes[i]['order'])
         labOfPoint[i] = aGraph.nodes[i]['order']
 

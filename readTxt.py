@@ -10,7 +10,10 @@ def readTxtFunction(path,txtNum):
     while line:
         dic = re.findall(r"\d+\.?\d*", line)
         if int(dic[0]) == indexOfPic:
-            dicOfResult = [round(float(dic[2])),round(float(dic[3])),round(float(dic[4])),round(float(dic[5]))]
+            dicOfResult = [round(float(dic[2])),
+                           round(float(dic[3])),
+                           round(float(dic[4])),
+                           round(float(dic[5]))]
             result[indexOfPic-1].append(dicOfResult)
             line = f.readline()
         elif int(dic[0]) == indexOfPic+1:

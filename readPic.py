@@ -19,7 +19,11 @@ def readPicFunction(path, path2, picName):
         img = cv.imread(path+path2+"/"+picName)
         rectangles = readTxt.readTxtFunction(path,txtNum)
         for rectangle in rectangles:
-            image_rect = cv.rectangle(img,(rectangle[0],rectangle[1]),(rectangle[0]+rectangle[2],rectangle[1]+rectangle[3]),(0,0,255),2)
+            image_rect = cv.rectangle(img,
+                                      (rectangle[0], rectangle[1]),
+                                      (rectangle[0]+rectangle[2], rectangle[1]+rectangle[3]),
+                                      (0, 0, 255),
+                                      2)
 
         cv.imwrite(path+"/result/"+picName,img)
 

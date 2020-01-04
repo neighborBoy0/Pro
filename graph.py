@@ -64,7 +64,15 @@ def createGraph(listOfGraph, thershold):
     for i in range(0, len(listOfGraph)):
 
         # add a node in this graph, and we add all of information of this node as attribute
-        G.add_node(i, x = listOfGraph[i][0][1], y = listOfGraph[i][0][0], lenghtOfRec = listOfGraph[i][1][0], heightOfRec = listOfGraph[i][1][1], r = listOfGraph[i][2][0], g = listOfGraph[i][2][1], b = listOfGraph[i][2][2], order = i)
+        G.add_node(i,
+                   x=listOfGraph[i][0][1],
+                   y=listOfGraph[i][0][0],
+                   lenghtOfRec=listOfGraph[i][1][0],
+                   heightOfRec = listOfGraph[i][1][1],
+                   r=listOfGraph[i][2][0],
+                   g=listOfGraph[i][2][1],
+                   b=listOfGraph[i][2][2],
+                   order=i)
         #G.add_node(i,order = i)
 
         # the i th node position
@@ -72,7 +80,7 @@ def createGraph(listOfGraph, thershold):
 
         # turn RGB to Hex and add it in colorOfPoint array
         colorOfThisPoint = "#"
-        for j in range(0,3):
+        for j in range(0, 3):
             a = str(hex(int(listOfGraph[i][2][j])))[2:]
             if len(a) == 1:
                 a = '0' + a
@@ -97,7 +105,12 @@ def createGraph(listOfGraph, thershold):
     nsize = 100
 
     # draw this graph
-    nx.draw(G, pos=positionOfPoint, with_labels=True, node_color=colorOfPoint, node_shape='.', node_size=nsize)
+    nx.draw(G,
+            pos=positionOfPoint,
+            with_labels=True,
+            node_color=colorOfPoint,
+            node_shape='.',
+            node_size=nsize)
 
     # save this graph whose name is ba.png
     # plt.savefig("ba.png")

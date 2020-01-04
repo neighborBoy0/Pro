@@ -88,7 +88,10 @@ def readTxt(path,txtNum):
         # dic[5] is the height of the rectangle
 
         if int(dic[0]) == indexOfPic:   # when this line is a rectangle in the 'indexOfPic'th picture
-            dicOfResult = [round(float(dic[2])),round(float(dic[3])),round(float(dic[4])),round(float(dic[5]))]
+            dicOfResult = [round(float(dic[2])),
+                           round(float(dic[3])),
+                           round(float(dic[4])),
+                           round(float(dic[5]))]
             result[indexOfPic-1].append(dicOfResult)
             line = f.readline()
 

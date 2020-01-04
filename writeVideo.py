@@ -80,7 +80,14 @@ def drawNewGraph(aGraph, path, x):
 
     fig = plt.figure(1, figsize=(lenOfPic / 100, widOfPic / 100))
     nsize = 100
-    nx.draw(aGraph, pos=positionOfPoint, labels=labOfPoint, node_color=colorOfPoint, node_shape='.', node_size=nsize)
+
+    # Draw graph
+    nx.draw(aGraph,
+            pos=positionOfPoint,
+            labels=labOfPoint,
+            node_color=colorOfPoint,
+            node_shape='.',
+            node_size=nsize)
 
     try:
         if not os.path.exists(path + '/graphs'):

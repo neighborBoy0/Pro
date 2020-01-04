@@ -14,7 +14,7 @@ def match2Graph(G1,G2):
     # obtain min_edit_path and min_edit_distance
     para2, para3 = nx.optimal_edit_paths(G1, G2)
     maxOrder = 0
-    for i in range(0,len(G1.nodes)):
+    for i in range(0, len(G1.nodes)):
         if G1.nodes[i]['order'] > maxOrder:
             maxOrder = G1.nodes[i]['order']
 

@@ -50,7 +50,7 @@ def writeVideo(path, listOfPic, listOfRec, numOfPic):
         graphs.append(G)
         x += 1
 
-    for i in range(0,len(graphs)-1):
+    for i in range(0, len(graphs)-1):
         match.match2Graph(graphs[i], graphs[i+1])
         drawNewGraph(graphs[i], path, i)
     drawNewGraph(graphs[len(graphs)-1], path, len(graphs)-1)

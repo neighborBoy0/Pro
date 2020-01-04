@@ -47,10 +47,10 @@ def writeGraph(graph, x, path):
 
 """
 * objective: create the graph
-* enter: listOfGraph - all of rectangles information in a picture, thersholo - correlation
+* enter: listOfGraph - all of rectangles information in a picture, threshold - correlation
 * return: G - a graph
 """
-def createGraph(listOfGraph, thershold):
+def createGraph(listOfGraph, threshold):
     # create a void graph
     G = nx.Graph()
 
@@ -67,15 +67,16 @@ def createGraph(listOfGraph, thershold):
         G.add_node(i,
                    x=listOfGraph[i][0][1],
                    y=listOfGraph[i][0][0],
-                   lenghtOfRec=listOfGraph[i][1][0],
-                   heightOfRec = listOfGraph[i][1][1],
+                   widthOfRec=listOfGraph[i][1][0],
+                   heigthOfRec=listOfGraph[i][1][1],
                    r=listOfGraph[i][2][0],
                    g=listOfGraph[i][2][1],
                    b=listOfGraph[i][2][2],
                    order=i)
-        #G.add_node(i,order = i)
 
         # the i th node position
+        # x=listOfGraph[i][0][1]
+        # y=listOfGraph[i][0][0]
         positionOfPoint[i] = (listOfGraph[i][0][1], listOfGraph[i][0][0])
 
         # turn RGB to Hex and add it in colorOfPoint array
@@ -95,10 +96,11 @@ def createGraph(listOfGraph, thershold):
             d = pow(
                 pow(listOfGraph[i][0][0] - listOfGraph[j][0][0], 2) + pow(listOfGraph[i][0][1] - listOfGraph[j][0][1],
                                                                           2), 0.5)
-            if d < thershold:
+            if d < threshold:
                 G.add_edge(i, j)
 
     # Canvas size = video size
+    # this method is to keep the same size of all pictures
     fig = plt.figure(1, figsize=(writeVideo.lenOfPic / 100, writeVideo.widOfPic / 100))
 
     # node size

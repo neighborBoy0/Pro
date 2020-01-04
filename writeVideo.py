@@ -42,6 +42,7 @@ def writeVideo(path, listOfPic, listOfRec, numOfPic):
 
     for graphPoint in graphPoints:
         # to create graphs for pictures according to the list of all of information of rectangles
+        # threshold = 150
         G = graph.createGraph(graphPoint, 150)
 
         # to save these graphs

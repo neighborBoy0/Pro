@@ -15,29 +15,40 @@ def slicingFunction(pic, recOfPic, i, path, widthOfPic, heightOfPic):
     result = []
     z = 1
     for rec in recOfPic:
-        # rec[1]+rec[3] is the vertical coordinates of left of rectangle +
-        # vertical coordinates of right of rectangle
-        if rec[1] + rec[3] >= widthOfPic:
-            right = widthOfPic-1
-        else:
-            right = rec[1] + rec[3]
 
-        # rec[0]+rec[2] is the horizontal ordinate of the top of rectangle +
-        # horizontal ordinate of the bottom of rectangle
-        if rec[0] + rec[2] >= heightOfPic:
-            down = heightOfPic-1
-        else:
-            down = rec[0] + rec[2]
+        x = rec[0]  # x: horizontal ordinate of upper-left corner of rectangle
+        y = rec[1]  # y: vertical coordinates of upper-left corner of rectangle
+        width = rec[2]   # width of rectangle
+        heigth = rec[3]  # height of rectangle
 
-        picTemp = pic[rec[1]:right, rec[0]:down]   # crop the picture according to the rectangle
+        # (x2, y2): Coordinates of the bottom right corner of the rectangle
+        # y2: vertical coordinates of the bottom right corner of the rectangle
+        if y + heigth >= widthOfPic:
+            y2 = widthOfPic-1
+        else:
+            y2 = y + heigth
+
+        # x2: horizontal ordinate of the bottom right corner of the rectangle
+        if x + width >= heightOfPic:
+            x2 = heightOfPic-1
+        else:
+            x2 = x + width
+
+        # crop/cut the picture according to the rectangle
+        # y:y2 = Height range of the rectangle
+        # x:x2 = Width range of the rectangle
+        picTemp = pic[y:y2, x:x2]
 
         picName = str(i) + "-" + str(z)
         z += 1
-        cv2.imwrite(path + "/result/" + picName + ".jpg", picTemp)   # save these rectangle
 
-        # for every rectangle, we should calculate the coordinate of the middle of the bottom edge
-        # (the first element in resultTemp), the length and height of the rectangle(the second element in resultTemp),
-        # the average of RGB(the third element in resultTemp)
+        # save these rectangle
+        cv2.imwrite(path + "/result/" + picName + ".jpg", picTemp)
+
+        # for every rectangle, we should calculate:
+        # the first element in resultTemp: the coordinate of the middle of the bottom edge
+        # the second element in resultTemp: the length and height of the rectangle,
+        # the third element in resultTemp: the average of RGB
         resultTemp = [[rec[1] + (rec[3] / 2), rec[0] + rec[2]],
                       [rec[3], rec[2]],
                       numpy.mean(picTemp, 0).mean(0)]

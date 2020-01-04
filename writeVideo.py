@@ -27,7 +27,7 @@ def writeVideo(path, listOfPic, listOfRec, numOfPic):
     widOfPic = len(listOfPic[0])
     graphPoints = []
 
-    for i in range(0,numOfPic):         # the i th picture in the video
+    for i in range(0, numOfPic):         # the i th picture in the video
 
         # get list of all of information of rectangles in the i th picture
         temp = slicing.slicingFunction(listOfPic[i], listOfRec[i], i+1, path, widOfPic, lenOfPic)

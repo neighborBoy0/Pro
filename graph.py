@@ -24,7 +24,7 @@ def writeGraph(graph, x, path):
         root.appendChild(node)
         node.setAttribute('x', str(graph.nodes[i]['x']))
         node.setAttribute('y', str(graph.nodes[i]['y']))
-        node.setAttribute('lenghtOfRec', str(graph.nodes[i]['lenghtOfRec']))
+        node.setAttribute('widthOfRec', str(graph.nodes[i]['widthOfRec']))
         node.setAttribute('heightOfRec', str(graph.nodes[i]['heightOfRec']))
         node.setAttribute('r', str(int(graph.nodes[i]['r'])))
         node.setAttribute('g', str(int(graph.nodes[i]['g'])))
@@ -39,7 +39,7 @@ def writeGraph(graph, x, path):
         continue
 
     # open a new empty file in disk
-    fp = open(path+str(x)+".gxl",'w')
+    fp = open(path+str(x)+".gxl", 'w')
 
     # write the graph in this empty file
     doc.writexml(fp, indent='\t', addindent='\t', newl='\n', encoding="utf-8")

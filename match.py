@@ -12,26 +12,26 @@ def match2Graph(G1,G2):
     global a
 
     # obtain min_edit_path and min_edit_distance
-    para2, para3 = nx.optimal_edit_paths(G1, G2)
+    paths, cost = nx.optimal_edit_paths(G1, G2)
     maxOrder = 0
     for i in range(0, len(G1.nodes)):
         if G1.nodes[i]['order'] > maxOrder:
             maxOrder = G1.nodes[i]['order']
 
     # match 2 graph
-    for i in range(0,len(para2[0][0])):
-        if (para2[0][0][i][0] != None) and (para2[0][0][i][1] != None):
-            G2.nodes[para2[0][0][i][1]]['order'] = G1.nodes[para2[0][0][i][0]]['order']
-        elif para2[0][0][i][0] == None:
+    for i in range(0, len(paths[0][0])):
+        if (paths[0][0][i][0] != None) and (paths[0][0][i][1] != None):
+            G2.nodes[paths[0][0][i][1]]['order'] = G1.nodes[paths[0][0][i][0]]['order']
+        elif paths[0][0][i][0] == None:
             maxOrder += 1
-            G2.nodes[para2[0][0][i][1]]['order'] = maxOrder
+            G2.nodes[paths[0][0][i][1]]['order'] = maxOrder
         else:
             continue
 
-    for paraTemp in para2:
+    for paraTemp in paths:
         matchNumber = 0
         for matchNodes in paraTemp[0]:
             if matchNodes[0] != matchNodes[1]:
                 matchNumber += 1
 
-    print(para3)
+    print(cost)

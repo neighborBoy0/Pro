@@ -68,7 +68,7 @@ def createGraph(listOfGraph, threshold):
                    x=listOfGraph[i][0][1],
                    y=listOfGraph[i][0][0],
                    widthOfRec=listOfGraph[i][1][0],
-                   heigthOfRec=listOfGraph[i][1][1],
+                   heightOfRec=listOfGraph[i][1][1],
                    r=listOfGraph[i][2][0],
                    g=listOfGraph[i][2][1],
                    b=listOfGraph[i][2][2],

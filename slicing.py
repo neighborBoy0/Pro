@@ -1,5 +1,6 @@
 import cv2
 import numpy
+import os
 
 """
 * objective: crop a picture into multiple rectangles and save these rectangles
@@ -43,6 +44,11 @@ def slicingFunction(pic, recOfPic, i, path, widthOfPic, heightOfPic):
         z += 1
 
         # save these rectangle
+        try:
+            if not os.path.exists(path + '/result'):
+                os.makedirs(path + '/result')
+        except OSError:
+            print('Error: Creating directory of result !')
         cv2.imwrite(path + "/result/" + picName + ".jpg", picTemp)
 
         # for every rectangle, we should calculate:

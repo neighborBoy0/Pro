@@ -6,6 +6,7 @@ import networkx as nx
 from pylab import show
 import matplotlib.pyplot as plt
 import productVideo
+import cv2
 
 lenOfPic = 0   # height of picture/video
 widOfPic = 0   # length of picture/video
@@ -57,14 +58,17 @@ def writeVideo(path, listOfPic, listOfRec, numOfPic):
 
     size = (lenOfPic, widOfPic)
 
-    productVideo.picvideo(path+'/graphs', size)
+    productVideo.picvideo(path + '/graphs', size)
+    productVideo.picvideo(path + '/imgTest', size)
 
     print("done")
 
 
 """
-* objective: draw graphs after matching
+* objective: draw graphs and pictures after matching
 * input: aGraph - a graph matched
+*        path - work path
+*        x - index of picture / graph
 * output: nothing, but generate graphs
 """
 def drawNewGraph(aGraph, path, x):
@@ -90,6 +94,10 @@ def drawNewGraph(aGraph, path, x):
             node_shape='.',
             node_size=nsize)
 
+    # turn a letter to an array, because cv2.rectangle can only use 3 numbers of RGB
+    colorOfRec = getColorOfRec(colorOfPoint)
+
+    # save graphs in drive
     try:
         if not os.path.exists(path + '/graphs'):
             os.makedirs(path + '/graphs')
@@ -99,3 +107,59 @@ def drawNewGraph(aGraph, path, x):
     plt.savefig(path+'/graphs/'+str(x)+'.jpg')
     show()
     print("done drawNewGraph")
+
+    # save pictures with colorful rectangles in folder named 'imgTest'
+    try:
+        if not os.path.exists(path + '/imgTest'):
+            os.makedirs(path + '/imgTest')
+    except OSError:
+        print('Error: Creating directory of graphs !')
+
+    # those pictures made by video are saved in folder 'img1'
+    filelist = os.listdir(path + '/img1/')
+    items = sorted(filelist)
+    indexOfPic = 0
+    for y in range(0, len(items)):
+        if items[y].endswith('.jpg'):
+            if indexOfPic == x:
+                image = cv2.imread(path + '/img1/' + items[y])
+
+                # draw those rectangles in a picture
+                for indexOfNode in range(0, len(aGraph.nodes)):
+                    xmin = int(aGraph.nodes[indexOfNode]['x'] - aGraph.nodes[indexOfNode]['widthOfRec'] / 2)
+                    ymin = int(aGraph.nodes[indexOfNode]['y'] - aGraph.nodes[indexOfNode]['heightOfRec'])
+                    xmax = int(aGraph.nodes[indexOfNode]['x'])
+                    ymax = int(aGraph.nodes[indexOfNode]['y'] + aGraph.nodes[indexOfNode]['heightOfRec'])
+                    cv2.rectangle(image, (xmin, ymin), (xmax, ymax), colorOfRec[indexOfNode], 2)
+
+                cv2.imwrite(path + '/imgTest/' + str(indexOfPic) + '.jpg', image)
+                print("done drawNewPic")
+                return
+            else:
+                indexOfPic += 1
+
+"""
+* Objective: turn those color to RGB
+* input: colorOfPoint - an array of colors, we use it in networkX.draw
+* output: colorOfRec - a dictionary of arrays, every array is a RGB color of a rectangle
+"""
+def getColorOfRec(colorOfPoint):
+    colorOfRec = []
+    for color in colorOfPoint:
+        if color == 'b':
+            colorOfRec.append((255, 0, 0))
+        elif color == 'g':
+            colorOfRec.append((0, 255, 0))
+        elif color == 'r':
+            colorOfRec.append((0, 0, 255))
+        elif color == 'c':
+            colorOfRec.append((255, 255, 0))
+        elif color == 'm':
+            colorOfRec.append((255, 0, 255))
+        elif color == 'y':
+            colorOfRec.append((0, 255, 255))
+        elif color == 'k':
+            colorOfRec.append((255, 255, 255))
+        else:
+            colorOfRec.append((0, 0, 0))
+    return colorOfRec

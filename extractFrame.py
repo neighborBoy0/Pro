@@ -13,7 +13,11 @@ def readVideo(videoPath, videoName):
 
     # Read the video from specified path
     video = videoPath + "/" +videoName
-    vidcap = cv2.VideoCapture(video)
+    try:
+        vidcap = cv2.VideoCapture(video)
+    except OSError:
+        print("C'est un faux chemin")
+        exit(0)
 
     try:
         # creating a folder named img
@@ -71,8 +75,11 @@ def readVideo(videoPath, videoName):
             the third dimensional - the detail of the rectangle
 """
 def readTxt(path,txtNum):
-
-    f = open(path+"/det/det.txt")    # open the .txt file
+    try:
+        f = open(path+"/det/det.txt")    # open the .txt file
+    except OSError:
+        print("C'est un faux chemin")
+        exit(0)
     line = f.readline()
     result = []
     result.append([])

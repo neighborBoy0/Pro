@@ -40,6 +40,8 @@ def writeVideo(path, listOfPic, listOfRec, numOfPic):
     # to found a directory
     if not os.path.exists(path + '/GXL'):
         os.makedirs(path + '/GXL')
+    if not os.path.exists(path + '/GXL2'):
+        os.makedirs(path + '/GXL2')
 
     for graphPoint in graphPoints:
         # to create graphs for pictures according to the list of all of information of rectangles
@@ -54,7 +56,9 @@ def writeVideo(path, listOfPic, listOfRec, numOfPic):
     for i in range(0, len(graphs)-1):
         match.match2Graph(graphs[i], graphs[i+1])
         drawNewGraph(graphs[i], path, i)
+        graph.writeGraph(graphs[i], i, path + "/GXL2/")
     drawNewGraph(graphs[len(graphs)-1], path, len(graphs)-1)
+    graph.writeGraph(graphs[len(graphs)-1], len(graphs)-1, path + "/GXL2/")
 
     size = (lenOfPic, widOfPic)
 

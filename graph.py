@@ -65,8 +65,8 @@ def createGraph(listOfGraph, threshold):
 
         # add a node in this graph, and we add all of information of this node as attribute
         G.add_node(i,
-                   x=listOfGraph[i][0][1],
-                   y=listOfGraph[i][0][0],
+                   x=listOfGraph[i][0][0],
+                   y=listOfGraph[i][0][1],
                    widthOfRec=listOfGraph[i][1][0],
                    heightOfRec=listOfGraph[i][1][1],
                    r=listOfGraph[i][2][0],

@@ -132,8 +132,8 @@ def drawNewGraph(aGraph, path, x):
                 for indexOfNode in range(0, len(aGraph.nodes)):
                     xmin = int(aGraph.nodes[indexOfNode]['x'] - aGraph.nodes[indexOfNode]['widthOfRec'] / 2)
                     ymin = int(aGraph.nodes[indexOfNode]['y'] - aGraph.nodes[indexOfNode]['heightOfRec'])
-                    xmax = int(aGraph.nodes[indexOfNode]['x'])
-                    ymax = int(aGraph.nodes[indexOfNode]['y'] + aGraph.nodes[indexOfNode]['heightOfRec'])
+                    xmax = int(aGraph.nodes[indexOfNode]['x'] + aGraph.nodes[indexOfNode]['widthOfRec'] / 2)
+                    ymax = int(aGraph.nodes[indexOfNode]['y'])
                     cv2.rectangle(image, (xmin, ymin), (xmax, ymax), colorOfRec[indexOfNode], 2)
 
                 cv2.imwrite(path + '/imgTest/' + str(indexOfPic) + '.jpg', image)

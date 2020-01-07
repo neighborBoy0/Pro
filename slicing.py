@@ -55,8 +55,8 @@ def slicingFunction(pic, recOfPic, i, path, widthOfPic, heightOfPic):
         # the first element in resultTemp: the coordinate of the middle of the bottom edge
         # the second element in resultTemp: the length and height of the rectangle,
         # the third element in resultTemp: the average of RGB
-        resultTemp = [[rec[1] + (rec[3] / 2), rec[0] + rec[2]],
-                      [rec[3], rec[2]],
+        resultTemp = [[rec[0] + (rec[2] / 2), rec[1] + rec[3]],
+                      [rec[2], rec[3]],
                       numpy.mean(picTemp, 0).mean(0)]
         result.append(resultTemp)
 

@@ -135,6 +135,7 @@ def drawNewGraph(aGraph, path, x):
                     xmax = int(aGraph.nodes[indexOfNode]['x'] + aGraph.nodes[indexOfNode]['widthOfRec'] / 2)
                     ymax = int(aGraph.nodes[indexOfNode]['y'])
                     cv2.rectangle(image, (xmin, ymin), (xmax, ymax), colorOfRec[indexOfNode], 2)
+                    cv2.putText(image, str(aGraph.nodes[indexOfNode]['order']), (xmin, ymin), cv2.FONT_HERSHEY_PLAIN, 2.0, colorOfRec[indexOfNode], 2)
 
                 cv2.imwrite(path + '/imgTest/' + str(indexOfPic) + '.jpg', image)
                 print("done drawNewPic")
